@@ -11,11 +11,16 @@
     Brand color roles (Soft Strategy Weekly system):
     ink #0A0A0A     -> default text + bold CTA backdrop
     white #FAF7F5   -> card base
-    mauve #937880   -> eyebrow labels everywhere + "reflective" Research section backdrop
-    sage #929592    -> "practical" Action section backdrop
+    mauve #937880   -> eyebrow labels everywhere + "reflective" Research accent border
+    sage #929592    -> "practical" Action accent border
     pink #FDB2D2    -> soft fill/frame around the hero image
     yellow #F3EC50  -> exactly one accent per section (Reframe highlight, CTA button text)
     body bg #EFEBE4 -> outer page background
+
+    Design note: sections use a subtle left-border accent rather than a
+    full-bleed color block, to read as an editorial newsletter rather than a
+    graphic/poster layout. Body copy fields may contain "\n\n"-separated
+    paragraphs so a section can hold real substance, not just one line.
   */
   body {
     margin: 0;
@@ -37,15 +42,16 @@
   }
   .header {
     text-align: center;
-    padding: 32px 24px 8px;
+    padding: 28px 24px 8px;
   }
   .header img.logo {
-    max-width: 220px;
+    max-width: 180px;
     height: auto;
   }
   .header .tagline {
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
+    font-style: normal;
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -55,21 +61,26 @@
   .eyebrow {
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
+    font-style: normal;
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #937880;
-    margin: 0 0 8px;
+    margin: 0 0 10px;
   }
   .section {
-    padding: 28px 32px;
+    padding: 24px 32px;
   }
-  .section.mauve {
-    background-color: #937880;
+  .section-accent {
+    padding: 20px 28px 20px 24px;
+    margin: 0 32px 28px;
+    border-left: 4px solid transparent;
   }
-  .section.mauve .eyebrow,
-  .section.mauve p {
-    color: #FAF7F5;
+  .section-accent.mauve {
+    border-left-color: #937880;
+  }
+  .section-accent.sage {
+    border-left-color: #929592;
   }
   h1 {
     font-family: 'Poppins', sans-serif;
@@ -86,20 +97,16 @@
     font-size: 16px;
     line-height: 1.6;
     color: #0A0A0A;
-    margin: 0;
+    margin: 0 0 14px;
+  }
+  p:last-child {
+    margin-bottom: 0;
   }
   .highlight {
     background-color: #F3EC50;
     padding: 2px 6px;
     border-radius: 4px;
     font-style: normal;
-  }
-  .script-accent {
-    font-family: 'Yellowtail', cursive;
-    font-size: 32px;
-    color: #937880;
-    display: block;
-    margin-bottom: 8px;
   }
   .hero-frame {
     background-color: #FDB2D2;
@@ -111,15 +118,6 @@
     height: auto;
     display: block;
     border-radius: 12px;
-  }
-  .action-card {
-    background-color: #929592;
-    border-radius: 20px;
-    padding: 24px;
-    margin: 0 32px 28px;
-  }
-  .action-card .eyebrow {
-    color: #FAF7F5;
   }
   /*
     Full button system per the brand spec (all four defined here so any future
@@ -185,7 +183,7 @@
   }
   .closing {
     text-align: center;
-    padding: 32px;
+    padding: 8px 32px 32px;
   }
   .closing p {
     font-family: 'Inter', sans-serif;
@@ -199,9 +197,16 @@
     text-align: center;
     padding: 8px 16px 48px;
   }
+  .footer .script-flourish {
+    font-family: 'Yellowtail', cursive;
+    font-style: normal;
+    font-size: 22px;
+    color: #937880;
+    margin: 0 0 2px;
+  }
   .footer p {
     font-family: 'Inter', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     font-style: normal;
     font-size: 12px;
     color: #937880;
@@ -226,27 +231,31 @@
       <img class="hero-image" src="{{ hero_image_src }}" alt="{{ subject_line }}" />
     </div>
     {% endif %}
-    <div class="section mauve">
+    <div class="section-accent mauve">
       <p class="eyebrow">The Research</p>
-      <p>{{ research }}</p>
+      {% for paragraph in research.split('\n\n') %}
+      <p>{{ paragraph }}</p>
+      {% endfor %}
     </div>
     <div class="section">
       <p class="eyebrow">The Reframe</p>
       <p><span class="highlight">{{ reframe }}</span></p>
     </div>
-    <div class="action-card">
+    <div class="section-accent sage">
       <p class="eyebrow">Do This Instead</p>
-      <p>{{ action }}</p>
+      {% for paragraph in action.split('\n\n') %}
+      <p>{{ paragraph }}</p>
+      {% endfor %}
     </div>
     <div class="closing">
-      <span class="script-accent">softly, belle</span>
       <p>{{ closing }}</p>
       <a class="btn-primary" href="mailto:belbel.bella00@gmail.com?subject=Re%3A%20{{ subject_line | urlencode }}">Tell Me How It Goes</a>
     </div>
   </div>
   <div class="footer">
-    <p>softly by belle &middot; Soft Strategy Weekly</p>
+    <p class="script-flourish">p.s.</p>
     <p><a class="text-link" href="mailto:belbel.bella00@gmail.com?subject=Forwarding%20Soft%20Strategy%20Weekly">Know someone who needs this? Forward it their way.</a></p>
+    <p>softly by belle &middot; Soft Strategy Weekly</p>
   </div>
 </div>
 </body>
