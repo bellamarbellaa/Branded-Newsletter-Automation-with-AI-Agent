@@ -56,6 +56,8 @@
     font-family: 'Yellowtail', 'Brush Script MT', cursive;
     font-size: 36px;
     color: #0A0A0A;
+    display: inline-block;
+    transform: skewX(-8deg);
   }
   .wordmark-by {
     font-family: 'Inter', sans-serif;
@@ -138,9 +140,8 @@
   }
   /*
     Full button system per the brand spec (all four defined here so any future
-    issue can use whichever fits; the base template below only exercises
-    .text-link, since the closing now reads as a plain invitation to reply
-    rather than a marketing CTA).
+    issue can use whichever fits; the base template below exercises
+    .btn-primary for the reply CTA and .text-link in the footer).
   */
   .btn-primary {
     display: inline-block;
@@ -228,6 +229,8 @@
   .footer-wordmark-script {
     font-family: 'Yellowtail', 'Brush Script MT', cursive;
     font-size: 16px;
+    display: inline-block;
+    transform: skewX(-8deg);
   }
   .footer-wordmark-by {
     font-style: italic;
@@ -268,7 +271,8 @@
     </div>
     <div class="closing">
       <p>{{ closing }}</p>
-      <p class="invite">If you try this, I'd love to hear how it goes &mdash; <a class="text-link" href="mailto:belbel.bella00@gmail.com?subject=Re%3A%20{{ subject_line | urlencode }}">hit reply</a>.</p>
+      <p class="invite">If you try this, I'd love to hear how it goes.</p>
+      <a class="btn-primary" href="mailto:belbel.bella00@gmail.com?subject=Re%3A%20{{ subject_line | urlencode }}">Hit Reply</a>
     </div>
   </div>
   <div class="footer">
