@@ -11,16 +11,20 @@
     Brand color roles (Soft Strategy Weekly system):
     ink #0A0A0A     -> default text + bold CTA backdrop
     white #FAF7F5   -> card base
-    mauve #937880   -> eyebrow labels everywhere + "reflective" Research accent border
+    mauve #937880   -> eyebrow labels + "reflective" Research accent border
     sage #929592    -> "practical" Action accent border
     pink #FDB2D2    -> soft fill/frame around the hero image
-    yellow #F3EC50  -> exactly one accent per section (Reframe highlight, CTA button text)
+    yellow #F3EC50  -> exactly one accent per section (Reframe highlight)
     body bg #EFEBE4 -> outer page background
 
-    Design note: sections use a subtle left-border accent rather than a
-    full-bleed color block, to read as an editorial newsletter rather than a
-    graphic/poster layout. Body copy fields may contain "\n\n"-separated
-    paragraphs so a section can hold real substance, not just one line.
+    Header uses a text-recreated wordmark (Yellowtail script + italic Inter
+    "by") instead of the logo PNG, at the stakeholder's request. The same
+    font pairing is reused at small size in the footer credit line so the
+    two brand-name appearances read as one consistent mark, not two styles.
+
+    Sections use a subtle left-border accent rather than a full-bleed color
+    block or a labeled sub-header, so the issue reads as continuous prose.
+    Body copy fields may contain "\n\n"-separated paragraphs.
   */
   body {
     margin: 0;
@@ -42,11 +46,24 @@
   }
   .header {
     text-align: center;
-    padding: 28px 24px 8px;
+    padding: 32px 24px 8px;
   }
-  .header img.logo {
-    max-width: 180px;
-    height: auto;
+  .wordmark {
+    margin: 0;
+    line-height: 1;
+  }
+  .wordmark-script {
+    font-family: 'Yellowtail', cursive;
+    font-size: 36px;
+    color: #0A0A0A;
+  }
+  .wordmark-by {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 16px;
+    color: #937880;
+    margin: 0 4px;
   }
   .header .tagline {
     font-family: 'Poppins', sans-serif;
@@ -56,7 +73,7 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #937880;
-    margin-top: 12px;
+    margin: 12px 0 0;
   }
   .eyebrow {
     font-family: 'Poppins', sans-serif;
@@ -122,7 +139,8 @@
   /*
     Full button system per the brand spec (all four defined here so any future
     issue can use whichever fits; the base template below only exercises
-    .btn-primary and .text-link, since a single issue doesn't need all four).
+    .text-link, since the closing now reads as a plain invitation to reply
+    rather than a marketing CTA).
   */
   .btn-primary {
     display: inline-block;
@@ -136,7 +154,6 @@
     font-size: 13px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    margin-top: 8px;
   }
   .btn-secondary {
     display: inline-block;
@@ -191,18 +208,14 @@
     font-style: italic;
     font-size: 18px;
     color: #0A0A0A;
-    margin-bottom: 20px;
+  }
+  .closing .invite {
+    font-size: 15px;
+    font-weight: 700;
   }
   .footer {
     text-align: center;
     padding: 8px 16px 48px;
-  }
-  .footer .script-flourish {
-    font-family: 'Yellowtail', cursive;
-    font-style: normal;
-    font-size: 22px;
-    color: #937880;
-    margin: 0 0 2px;
   }
   .footer p {
     font-family: 'Inter', sans-serif;
@@ -212,6 +225,13 @@
     color: #937880;
     margin: 4px 0;
   }
+  .footer-wordmark-script {
+    font-family: 'Yellowtail', cursive;
+    font-size: 16px;
+  }
+  .footer-wordmark-by {
+    font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -219,7 +239,9 @@
 <div class="email-wrapper">
   <div class="card">
     <div class="header">
-      <img class="logo" src="{{ logo_src }}" alt="softly by belle" />
+      <p class="wordmark">
+        <span class="wordmark-script">softly</span><span class="wordmark-by">by</span><span class="wordmark-script">belle</span>
+      </p>
       <p class="tagline">&#10022; Strategy That Builds A Soft Life &#10022;</p>
     </div>
     <div class="section">
@@ -232,30 +254,26 @@
     </div>
     {% endif %}
     <div class="section-accent mauve">
-      <p class="eyebrow">The Research</p>
       {% for paragraph in research.split('\n\n') %}
       <p>{{ paragraph }}</p>
       {% endfor %}
     </div>
     <div class="section">
-      <p class="eyebrow">The Reframe</p>
       <p><span class="highlight">{{ reframe }}</span></p>
     </div>
     <div class="section-accent sage">
-      <p class="eyebrow">Do This Instead</p>
       {% for paragraph in action.split('\n\n') %}
       <p>{{ paragraph }}</p>
       {% endfor %}
     </div>
     <div class="closing">
       <p>{{ closing }}</p>
-      <a class="btn-primary" href="mailto:belbel.bella00@gmail.com?subject=Re%3A%20{{ subject_line | urlencode }}">Tell Me How It Goes</a>
+      <p class="invite">If you try this, I'd love to hear how it goes &mdash; <a class="text-link" href="mailto:belbel.bella00@gmail.com?subject=Re%3A%20{{ subject_line | urlencode }}">hit reply</a>.</p>
     </div>
   </div>
   <div class="footer">
-    <p class="script-flourish">p.s.</p>
     <p><a class="text-link" href="mailto:belbel.bella00@gmail.com?subject=Forwarding%20Soft%20Strategy%20Weekly">Know someone who needs this? Forward it their way.</a></p>
-    <p>softly by belle &middot; Soft Strategy Weekly</p>
+    <p><span class="footer-wordmark-script">softly</span> <span class="footer-wordmark-by">by</span> <span class="footer-wordmark-script">belle</span> &middot; Soft Strategy Weekly</p>
   </div>
 </div>
 </body>
