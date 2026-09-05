@@ -17,7 +17,7 @@ Each issue starts from a single topic and moves through the same repeatable flow
 
 1. Install dependencies: `pip install -r requirements.txt`
 2. Run the one-time Gmail setup: `python -m tools.send_email --setup`
-3. Follow the steps in `workflows/create_newsletter_issue.md` for a given topic — it walks through research, writing, image generation, building the draft, and sending
+3. Follow the steps in `workflows/create_newsletter_issue.md` for a given topic — it walks through research, writing, image generation, building the draft, and sending (this is also packaged as a reusable Claude Code skill, so Claude picks up the process automatically once given a topic, rather than needing to be reminded of it each time)
 4. Each of the three tools can also be run on its own from the command line:
    - `python -m tools.generate_image` — generate an issue's illustration
    - `python -m tools.build_email_html` — build the branded draft for review
@@ -27,6 +27,9 @@ Each issue starts from a single topic and moves through the same repeatable flow
 
 **Workflow Documentation**
 Step-by-step process definition covering research, content drafting, image generation, review, and sending — the operating procedure the automation follows for every issue.
+
+**Claude Code Skill**
+A packaged version of the same process (`.claude/skills/`) so Claude recognizes "create a newsletter issue" as a known task and follows the established format automatically, without the process needing to be re-explained each time.
 
 **Image Generation**
 Script for generating a custom illustration for each newsletter issue via an external image API, including rate-limit handling.
