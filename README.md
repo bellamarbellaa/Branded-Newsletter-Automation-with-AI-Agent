@@ -1,30 +1,20 @@
-# Soft Strategy Weekly — Newsletter Automation
+# Newsletter Automation
 
-A branded newsletter, built to write itself.
+A Python-based automation system developed for a personal brand to manage newsletter research, content writing, image generation, email design, and delivery. The project demonstrates end-to-end workflow automation, API integration, and AI-assisted development using Claude Code.
 
-## What this is
+Files in this repository include:
 
-**Soft Strategy Weekly** is the newsletter for **softly by belle** — *"Strategy that builds a soft life."*
+**Workflow Documentation**
+Step-by-step process definition covering research, content drafting, image generation, review, and sending — the operating procedure the automation follows for every issue.
 
-Every issue takes one common belief people hold about themselves ("I'm just not a morning person," "I have no discipline," "adapting means selling out") and grounds it in real research, then turns that into one small, doable shift. No vague "studies show" energy — real sources, said plainly.
+**Image Generation**
+Script for generating a custom illustration for each newsletter issue via an external image API, including rate-limit handling.
 
-This repo is the automation behind it. Give it a topic, and it handles the rest:
+**Email Template & Builder**
+HTML/CSS email template implementing a consistent visual brand system (colors, typography, layout), and the script that renders it with an issue's content and image into a finished draft.
 
-1. **Researches** the belief — finds real, recent studies or named frameworks that actually explain it
-2. **Writes** the issue in the brand's voice — sharp, a little sassy, more "big sister" than self-help fluff
-3. **Illustrates** it — generates a soft, on-brand piece of art to go with the issue
-4. **Designs** it — builds the whole thing into a polished, branded email
-5. **Waits for a green light** — nothing sends until it's been reviewed
-6. **Sends** it, once approved
+**Email Sender**
+Script for authenticating and sending the finished newsletter via the Gmail API, including one-time OAuth setup and inline image embedding.
 
-## How it came together
-
-This was built with **[Claude Code](https://claude.com/claude-code)** — Anthropic's AI coding agent — as the one doing the building. The brief was a conversation: the brand voice, the color and font system, the structure every issue should follow. Claude Code turned that into an actual working system — the research step, the writing, the image generation, the email design, and the sending, all wired together — and kept refining it based on feedback on the real, rendered output along the way.
-
-It's an example of what's possible when you describe what you want in plain language and let an AI agent do the actual building.
-
-## The brand
-
-**softly by belle** — helping thoughtful women design lives they don't need to escape from, through strategic thinking for intentional living. Because the softest lives are often built on the strongest foundations.
-
-*Strategy that builds a soft life.*
+**Tests**
+Automated tests covering each component — image generation, HTML rendering, and email sending — to verify correct behavior before use.
