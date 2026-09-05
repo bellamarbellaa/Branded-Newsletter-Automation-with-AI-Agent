@@ -46,7 +46,7 @@ def build_message(content: dict, image_path: Path, to_address: str) -> dict:
     message.attach(MIMEText(html, "html"))
 
     with open(image_path, "rb") as f:
-        hero_image = MIMEImage(f.read(), _subtype="png")
+        hero_image = MIMEImage(f.read())
         hero_image.add_header("Content-ID", "<hero_image>")
         hero_image.add_header("Content-Disposition", "inline", filename="image.png")
         message.attach(hero_image)

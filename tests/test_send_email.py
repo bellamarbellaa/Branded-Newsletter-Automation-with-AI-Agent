@@ -7,6 +7,8 @@ import pytest
 
 from tools import send_email
 
+MINIMAL_PNG_BASE64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+
 SAMPLE_CONTENT = {
     "subject_line": "You're not lazy, you're depleted",
     "preview_text": "The chronotype research says otherwise, and it's better news than you think.",
@@ -21,7 +23,7 @@ SAMPLE_CONTENT = {
 
 def test_build_message_produces_multipart_with_inline_hero_image(tmp_path):
     image_path = tmp_path / "image.png"
-    image_path.write_bytes(b"fake-hero-bytes")
+    image_path.write_bytes(base64.b64decode(MINIMAL_PNG_BASE64))
 
     result = send_email.build_message(SAMPLE_CONTENT, image_path, "belbel.bella00@gmail.com")
     raw_bytes = base64.urlsafe_b64decode(result["raw"])
@@ -74,7 +76,7 @@ def test_send_email_calls_gmail_api_and_returns_message_id(tmp_path):
     content_path = tmp_path / "content.json"
     content_path.write_text(json.dumps(SAMPLE_CONTENT))
     image_path = tmp_path / "image.png"
-    image_path.write_bytes(b"fake-hero-bytes")
+    image_path.write_bytes(base64.b64decode(MINIMAL_PNG_BASE64))
 
     fake_creds = MagicMock()
     fake_service = MagicMock()
