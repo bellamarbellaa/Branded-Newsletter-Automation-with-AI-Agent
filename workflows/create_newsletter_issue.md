@@ -110,12 +110,11 @@ Tagline: "Strategy that builds a soft life."
 (Add anything discovered here as the system is used — rate-limit quirks, Gmail
 API errors, template rendering issues, etc.)
 
-- `brand_assets/logo.png` and `tools/extract_logo_png.py` are intentionally
-  kept even though the current template doesn't reference them. The
-  stakeholder replaced the image logo with a CSS text wordmark (see the
-  header comment in `templates/newsletter_template.html`), but the PNG is
-  kept as a ready fallback if that decision is ever reversed. Don't delete
-  them as "unused" — doing so would also break `tests/test_extract_logo_png.py`.
+- The header uses a CSS text wordmark, not an image logo (see the header
+  comment in `templates/newsletter_template.html`). The original logo SVG,
+  the extracted PNG, and the one-time extraction tool were removed once it
+  was confirmed nothing needed them — if an image logo is ever wanted again,
+  it'll need to be re-added from scratch.
 
 - First real issue ("Bend the method, not the mission") drew stakeholder
   feedback that the first research draft read too academic — full paragraphs
