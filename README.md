@@ -29,7 +29,7 @@ Each issue starts from a single topic and moves through the same repeatable flow
 Step-by-step process definition covering research, content drafting, image generation, review, and sending — the operating procedure the automation follows for every issue.
 
 **Claude Code Skill**
-A packaged version of the same process (`.claude/skills/`) so Claude recognizes "create a newsletter issue" as a known task and follows the established format automatically, without the process needing to be re-explained each time.
+A packaged version of the same process (`.claude/skills/`) so Claude recognizes "create a newsletter issue" as a known task and follows the established format automatically, without the process needing to be re-explained each time. It's picked up on its own when you ask for a new issue, or can be called directly with `/creating-newsletter-issue`.
 
 **Image Generation**
 Script for generating a custom illustration for each newsletter issue via an external image API, including rate-limit handling.
