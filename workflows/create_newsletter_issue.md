@@ -21,7 +21,14 @@ Tagline: "Strategy that builds a soft life."
    research points, studies, or named frameworks, with at least 2 of them
    including a concrete quantitative value** (a percentage, an effect size, a
    sample size, a number of years/participants, etc.) — not just qualitative
-   claims. Cite lightly, don't over-footnote.
+   claims. **Sources must be from 2010 or later** (2018+ preferred where a
+   good option exists) — no citing decades-old studies as if they're current.
+   **Cite lightly: the insight is the point, the study is just backup.** Lead
+   with the punchy claim in brand voice, then fold the citation into a short
+   embedded clause — "(a 2018 study on X found...)" — never a standalone
+   paragraph describing a study's methodology, sample, or design. If a
+   research point reads like a literature review instead of a confident
+   assertion with a receipt attached, rewrite it.
 3. One reframe
 4. One small, concrete actionable shift
 5. Closing line in brand voice — short, declarative, a little poetic, tying back
@@ -36,8 +43,12 @@ Tagline: "Strategy that builds a soft life."
    explain the belief — not vague "studies show" language. You need at least 3
    distinct research points for this issue, and at least 2 of them must carry
    a real quantitative value (a number, percentage, or statistic from the
-   source) rather than a purely qualitative claim. Cite lightly, don't
-   over-footnote.
+   source) rather than a purely qualitative claim. **Only use sources from
+   2010 onward** (favor 2018+ when a solid option is available) — check the
+   publication year before citing, and swap out anything older for a more
+   recent study covering similar ground. Keep the delivery light: state the
+   insight first, tuck the citation in as a brief aside, and never spend more
+   than one clause on what a study measured or how it was designed.
 
 2. **Write.** Draft the 5-part structure in the brand voice above. Save it as
    `.tmp/issues/<slug>/content.json` with this schema:
@@ -48,7 +59,7 @@ Tagline: "Strategy that builds a soft life."
      "preview_text": "string",
      "eyebrow": "string, e.g. SOFT STRATEGY WEEKLY",
      "hook": "string",
-     "research": "string — at least 3 research points (at least 2 with a quantitative value), each point as its own paragraph separated by \"\\n\\n\" (the template renders each as a separate <p>); cite lightly, real study/framework named",
+     "research": "string — at least 3 research points (at least 2 with a quantitative value), each point as its own paragraph separated by \"\\n\\n\" (the template renders each as a separate <p>); sources 2010+ only (2018+ preferred); lead with the insight, cite in one short embedded clause, never a study-methodology paragraph",
      "reframe": "string — one short, punchy line",
      "action": "string — one concrete step; may use \"\\n\\n\" for more than one paragraph if genuinely needed",
      "closing": "string — may end in a single sparing emoji",
@@ -105,3 +116,10 @@ API errors, template rendering issues, etc.)
   header comment in `templates/newsletter_template.html`), but the PNG is
   kept as a ready fallback if that decision is ever reversed. Don't delete
   them as "unused" — doing so would also break `tests/test_extract_logo_png.py`.
+
+- First real issue ("Bend the method, not the mission") drew stakeholder
+  feedback that the first research draft read too academic — full paragraphs
+  describing each study's methodology, with sources going back to 1999. The
+  research-section rules above (2010+ sources, cite in a light embedded
+  clause, insight leads) were added directly in response and now apply to
+  every issue going forward, not just that one.
