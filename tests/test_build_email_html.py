@@ -35,8 +35,9 @@ def test_render_send_mode_uses_cid_references(tmp_path):
 
     html = render_email_html(SAMPLE_CONTENT, image_path, mode="send")
 
-    assert "cid:logo_image" in html
     assert "cid:hero_image" in html
+    assert "cid:logo_image" not in html
+    assert "logo_src" not in html
     assert "file://" not in html
 
 

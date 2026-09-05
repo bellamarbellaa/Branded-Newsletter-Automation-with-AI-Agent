@@ -8,7 +8,6 @@ from jinja2 import Environment, FileSystemLoader
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = PROJECT_ROOT / "templates"
-LOGO_PATH = PROJECT_ROOT / "brand_assets" / "logo.png"
 
 _env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))
 
@@ -17,15 +16,13 @@ def render_email_html(content: dict, image_path: Path, mode: str = "preview") ->
     template = _env.get_template("newsletter_template.html")
 
     if mode == "preview":
-        logo_src = LOGO_PATH.resolve().as_uri()
         hero_image_src = Path(image_path).resolve().as_uri() if image_path else None
     elif mode == "send":
-        logo_src = "cid:logo_image"
         hero_image_src = "cid:hero_image" if image_path else None
     else:
         raise ValueError(f"unknown mode: {mode}")
 
-    return template.render(logo_src=logo_src, hero_image_src=hero_image_src, **content)
+    return template.render(hero_image_src=hero_image_src, **content)
 
 
 def build_draft(content_path: Path, image_path: Path, output_path: Path) -> Path:
