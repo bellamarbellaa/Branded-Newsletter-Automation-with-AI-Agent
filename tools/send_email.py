@@ -23,7 +23,8 @@ TOKEN_PATH = PROJECT_ROOT / "token.json"
 def run_oauth_setup() -> None:
     flow = InstalledAppFlow.from_client_secrets_file(str(CREDENTIALS_PATH), SCOPES)
     creds = flow.run_local_server(port=0)
-    TOKEN_PATH.write_text(creds.to_json())
+    TOKEN_PATH.write_text(creds.to_json(), encoding="utf-8")
+    TOKEN_PATH.chmod(0o600)
     print(f"Saved credentials to {TOKEN_PATH}")
 
 
@@ -33,7 +34,8 @@ def load_credentials() -> Credentials:
     creds = Credentials.from_authorized_user_file(str(TOKEN_PATH), SCOPES)
     if creds.expired and creds.refresh_token:
         creds.refresh(Request())
-        TOKEN_PATH.write_text(creds.to_json())
+        TOKEN_PATH.write_text(creds.to_json(), encoding="utf-8")
+        TOKEN_PATH.chmod(0o600)
     return creds
 
 
@@ -48,7 +50,7 @@ def build_message(content: dict, image_path: Path, to_address: str) -> dict:
     with open(image_path, "rb") as f:
         hero_image = MIMEImage(f.read())
         hero_image.add_header("Content-ID", "<hero_image>")
-        hero_image.add_header("Content-Disposition", "inline", filename="image.png")
+        hero_image.add_header("Content-Disposition", "inline", filename="hero-image")
         message.attach(hero_image)
 
     raw = base64.urlsafe_b64encode(message.as_bytes()).decode("utf-8")
@@ -56,7 +58,7 @@ def build_message(content: dict, image_path: Path, to_address: str) -> dict:
 
 
 def send_email(content_path: Path, image_path: Path, to_address: str) -> str:
-    content = json.loads(Path(content_path).read_text())
+    content = json.loads(Path(content_path).read_text(encoding="utf-8"))
     creds = load_credentials()
     service = build("gmail", "v1", credentials=creds)
     message_body = build_message(content, Path(image_path), to_address)

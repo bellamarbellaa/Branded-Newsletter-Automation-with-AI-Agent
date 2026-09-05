@@ -98,3 +98,10 @@ Tagline: "Strategy that builds a soft life."
 ## Notes / learnings
 (Add anything discovered here as the system is used — rate-limit quirks, Gmail
 API errors, template rendering issues, etc.)
+
+- `brand_assets/logo.png` and `tools/extract_logo_png.py` are intentionally
+  kept even though the current template doesn't reference them. The
+  stakeholder replaced the image logo with a CSS text wordmark (see the
+  header comment in `templates/newsletter_template.html`), but the PNG is
+  kept as a ready fallback if that decision is ever reversed. Don't delete
+  them as "unused" — doing so would also break `tests/test_extract_logo_png.py`.

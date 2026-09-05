@@ -6,9 +6,10 @@ from urllib.parse import quote
 
 import requests
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 POLLINATIONS_URL = "https://image.pollinations.ai/prompt/{prompt}"
 MIN_INTERVAL_SECONDS = 15
-RATE_LIMIT_STATE_FILE = Path(__file__).resolve().parent.parent / ".tmp" / ".pollinations_last_call"
+RATE_LIMIT_STATE_FILE = PROJECT_ROOT / ".tmp" / ".pollinations_last_call"
 
 
 def _wait_for_rate_limit() -> None:

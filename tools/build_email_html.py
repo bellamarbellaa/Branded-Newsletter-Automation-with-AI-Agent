@@ -9,7 +9,7 @@ from jinja2 import Environment, FileSystemLoader
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = PROJECT_ROOT / "templates"
 
-_env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)))
+_env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)), autoescape=True)
 
 
 def render_email_html(content: dict, image_path: Path, mode: str = "preview") -> str:
@@ -26,11 +26,11 @@ def render_email_html(content: dict, image_path: Path, mode: str = "preview") ->
 
 
 def build_draft(content_path: Path, image_path: Path, output_path: Path) -> Path:
-    content = json.loads(Path(content_path).read_text())
+    content = json.loads(Path(content_path).read_text(encoding="utf-8"))
     html = render_email_html(content, Path(image_path), mode="preview")
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(html)
+    output_path.write_text(html, encoding="utf-8")
     return output_path
 
 

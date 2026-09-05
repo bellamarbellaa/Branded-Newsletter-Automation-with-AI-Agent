@@ -1,4 +1,11 @@
-"""Extract the embedded base64 PNG from an SVG wrapper into a standalone PNG file."""
+"""Extract the embedded base64 PNG from an SVG wrapper into a standalone PNG file.
+
+Kept intentionally even though the current template no longer references the
+extracted logo.png: the stakeholder replaced the image logo with a CSS text
+wordmark, but the PNG this tool produces is kept as a ready fallback if that
+decision is ever reversed. Do not delete this tool or brand_assets/logo.png as
+"dead code" — see tests/test_extract_logo_png.py and workflows/create_newsletter_issue.md.
+"""
 import argparse
 import base64
 import re
@@ -6,7 +13,7 @@ from pathlib import Path
 
 
 def extract_png(svg_path: Path, output_path: Path) -> None:
-    svg_text = Path(svg_path).read_text()
+    svg_text = Path(svg_path).read_text(encoding="utf-8")
     match = re.search(r'href="data:image/png;base64,([^"]+)"', svg_text)
     if not match:
         raise ValueError(f"no embedded base64 PNG found in {svg_path}")
