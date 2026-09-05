@@ -23,7 +23,7 @@ Each issue starts from a single topic and moves through the same repeatable flow
    - `python -m tools.build_email_html` — build the branded draft for review
    - `python -m tools.send_email` — send the reviewed draft
 
-Files in this repository include:
+## Files in this repository include
 
 **Workflow Documentation**
 Step-by-step process definition covering research, content drafting, image generation, review, and sending — the operating procedure the automation follows for every issue.
